@@ -403,21 +403,24 @@ initializeWindows = function() {
     setLocationFN = function() {
         var hashes = torrentsTable.selectedRowsIds();
         if (hashes.length) {
+		    var hash = hashes[0];
+		    var row = torrentsTable.rows[hash];
+		    var oldSavePath = encodeURIComponent(row.full_data.save_path);
             new MochaUI.Window({
                 id: 'setLocationPage',
                 title: "QBT_TR(Set location)QBT_TR[CONTEXT=TransferListWidget]",
                 loadMethod: 'iframe',
-                contentURL: 'setlocation.html?hashes=' + hashes.join('|'),
+                contentURL: 'setlocation.html?hashes=' + hashes.join('|') + '&oldSavePath=' + oldSavePath,
                 scrollbars: false,
                 resizable: false,
                 maximizable: false,
                 paddingVertical: 0,
                 paddingHorizontal: 0,
-                width: 250,
+                width: 400,
                 height: 100
             });
         }
-    };
+};
 
     renameFN = function() {
         var hashes = torrentsTable.selectedRowsIds();
